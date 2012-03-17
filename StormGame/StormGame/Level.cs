@@ -46,7 +46,7 @@ namespace StormGame
             StartingDebris.StartOrbiting();
 
             Debris d1 = new LargeDebris();
-            d1.Position = new Vector2(400, 350);
+            d1.Position = new Vector2(400, 200);
             debris.Add(d1);
 
             //Debris d2 = new LargeDebris();
@@ -94,7 +94,7 @@ namespace StormGame
             {
                 deb.Update(gameTime, storm);
 
-                deb.Move(storm.GetCenter());
+                deb.Move(storm.GetCenter(), gameTime);
                 foreach (Destructible destructible in listofDestros)
                 {
                     if (destructible.CheckCollision(deb.BoundingBox) && deb.CooldownReady)

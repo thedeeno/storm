@@ -29,7 +29,7 @@ namespace StormGame
             
             imageTexture = Content.Load<Texture2D>("Circle");
             BoundingBox = new Rectangle(100, 100, imageTexture.Width, imageTexture.Height);
-            Position = new Vector2(100, 100);
+            Position = new Vector2(100, 200);
 
         }
 

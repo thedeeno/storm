@@ -107,14 +107,24 @@ namespace StormGame
             Damage = (int)Math.Ceiling((Speed*40) + (Weight / 4));
         }
 
-        public void Move(Vector2 center)
+        public void Move(Vector2 center, GameTime gameTime)
         {
             if (isOrbiting)
             {
-                Velocity = new Vector2((float)(radius * Math.Cos(theta)), (float)(radius * Math.Sin(theta)));
-                Velocity += center;
-                Position = Velocity;
-                Position.Normalize();
+                //Velocity = new Vector2((float)(radius * Math.Cos(theta)), (float)(radius * Math.Sin(theta)));
+                //Velocity += center;
+                //Position = Velocity;
+                //Position.Normalize();
+                var x0 = Position;
+                var v0 = Velocity;
+                var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+                var a = new Vector2(50, 0);
+
+                Position = new Vector2(.5f * a.X * (float)Math.Pow(deltaTime, 2) + v0.X * deltaTime + Position.X, Position.Y);
+
+                Velocity = new Vector2(a.X * deltaTime + Velocity.X, Velocity.Y);
+
+
             }
         }
 
