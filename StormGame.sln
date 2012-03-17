@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StormGame", "StormGame\StormGame\StormGame.csproj", "{C5A34132-3899-45BF-9129-057D7DBDA7F6}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "StormGameContent", "StormGame\StormGameContent\StormGameContent.contentproj", "{49F90E2F-2064-4FD6-857F-3BA11A05D794}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C5A34132-3899-45BF-9129-057D7DBDA7F6}.Debug|x86.ActiveCfg = Debug|x86
+		{C5A34132-3899-45BF-9129-057D7DBDA7F6}.Debug|x86.Build.0 = Debug|x86
+		{C5A34132-3899-45BF-9129-057D7DBDA7F6}.Release|x86.ActiveCfg = Release|x86
+		{C5A34132-3899-45BF-9129-057D7DBDA7F6}.Release|x86.Build.0 = Release|x86
+		{49F90E2F-2064-4FD6-857F-3BA11A05D794}.Debug|x86.ActiveCfg = Debug|x86
+		{49F90E2F-2064-4FD6-857F-3BA11A05D794}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

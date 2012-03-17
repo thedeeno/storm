@@ -1,0 +1,13 @@
+D:\Projects\Storm\StormGame\StormGame\StormGame\bin\x86\Debug\Content\DefaultFont.xnb
+D:\Projects\Storm\StormGame\StormGame\StormGame\bin\x86\Debug\StormGame.exe
+D:\Projects\Storm\StormGame\StormGame\StormGame\bin\x86\Debug\StormGame.pdb
+D:\Projects\Storm\StormGame\StormGame\StormGame\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\Projects\Storm\StormGame\StormGame\StormGame\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+D:\Projects\Storm\StormGame\StormGame\StormGame\obj\x86\Debug\StormGame.exe
+D:\Projects\Storm\StormGame\StormGame\StormGame\obj\x86\Debug\StormGame.pdb
+D:\Projects\Storm\StormGame\StormGame\StormGame\bin\x86\Debug\Content\Circle.xnb
+D:\Projects\Storm\StormGame\StormGame\StormGame\bin\x86\Debug\Content\MedBldgDead.xnb
+D:\Projects\Storm\StormGame\StormGame\StormGame\bin\x86\Debug\Content\MedBldgGood.xnb
+D:\Projects\Storm\StormGame\StormGame\StormGame\bin\x86\Debug\Content\MedBldgPoor.xnb
+D:\Projects\Storm\StormGame\StormGame\StormGame\bin\x86\Debug\Content\debris1.xnb
+D:\Projects\Storm\StormGame\StormGame\StormGame\bin\x86\Debug\Content\DamagePopupFont.xnb
