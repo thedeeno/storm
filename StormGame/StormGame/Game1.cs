@@ -57,7 +57,7 @@ namespace StormGame
             Globals.Font1 = _font;
             Globals.SpriteBatch = spriteBatch;
             Globals.Content = Content;
-
+            Globals.GraphicsDevice = GraphicsDevice;
             level1.LoadContent(Content);
 
            
