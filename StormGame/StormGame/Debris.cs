@@ -31,6 +31,7 @@ namespace StormGame
         private Vector2 Velocity;
         private float theta;
         private const float WindAcceleration = 0.0003f;
+        private Vector2 Accel;
         private bool wasHit;
                 
         public Rectangle BoundingBox { get; set;  }
@@ -117,17 +118,34 @@ namespace StormGame
                 //Velocity += center;
                 //Position = Velocity;
                 //Position.Normalize();
-                var x0 = Position;
+                const float MAX_VELOCITY = 10f;
+                const float MAX_ACCEL = 1f;
+
+                var a0 = Accel;
                 var v0 = Velocity;
+                var x0 = Position;
+
                 var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-                var a = new Vector2(50, 0);
+                var distance = (center - Position);
+
+               
+
+                Accel = distance*.5f;
+                Velocity += Accel * deltaTime;
+                Velocity = ApplyDrag(Velocity);
                 if (wasHit)
                     Velocity *= 0.3f;
+                if (Velocity.Length() > MAX_VELOCITY)
+                    Velocity = v0;
+                Position += Velocity;
                 wasHit = false;
 
-                Position = new Vector2(.5f * a.X * (float)Math.Pow(deltaTime, 2) + v0.X * deltaTime + Position.X, Position.Y);
+        public Vector2 ApplyDrag(Vector2 velocity)
+        {
+             var drag = new Vector2(0.95f);
+             return velocity *= drag;
+        }
 
-                Velocity = new Vector2(a.X * deltaTime + Velocity.X, Velocity.Y);
 
 
             }
