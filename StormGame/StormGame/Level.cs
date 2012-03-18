@@ -41,12 +41,12 @@ namespace StormGame
             destructibles.Add(medbdg6);
 
             StartingDebris = new LargeDebris();
-            StartingDebris.Position = new Vector2(0, 0);
+            StartingDebris.Position = new Vector2(250, 100);
             debris.Add(StartingDebris);
             StartingDebris.StartOrbiting();
 
             Debris d1 = new LargeDebris();
-            d1.Position = new Vector2(400, 200);
+            d1.Position = new Vector2(200, 400);
             debris.Add(d1);
 
             //Debris d2 = new LargeDebris();

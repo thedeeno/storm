@@ -33,6 +33,8 @@ namespace StormGame
         private const float WindAcceleration = 0.0003f;
         private Vector2 Accel;
         private bool wasHit;
+        private Vector2 _windForce;
+        private Vector2 _gravity;
                 
         public Rectangle BoundingBox { get; set;  }
                 
@@ -103,6 +105,19 @@ namespace StormGame
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Texture, Position, null, Color.White, RotationAngle, Origin, 1.0f, SpriteEffects.None, 0f);
+
+            Texture2D blank = new Texture2D(spriteBatch.GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
+            blank.SetData(new[] { Color.White });
+            DrawLine(spriteBatch, blank, 1, Color.Red, Position, Position + _windForce);
+            DrawLine(spriteBatch, blank, 1, Color.Green, Position, Position + _gravity);
+        }
+
+        void DrawLine(SpriteBatch batch, Texture2D blank, float width, Color color, Vector2 point1, Vector2 point2)
+        {
+            float angle = (float)Math.Atan2(point2.Y - point1.Y, point2.X - point1.X);
+            float length = Vector2.Distance(point1, point2);
+
+            batch.Draw(blank, point1, null, color, angle, Vector2.Zero, new Vector2(length, width), SpriteEffects.None, 0);
         }
 
         private void UpdateDamage()
@@ -114,7 +129,7 @@ namespace StormGame
         {
             if (isOrbiting)
             {
-                //Velocity = new Vector2((float)(radius * Math.Cos(theta)), (float)(radius * Math.Sin(theta)));
+                //var windAccel = new Vector2((float)(radius * Math.Cos(theta)), (float)(radius * Math.Sin(theta)));
                 //Velocity += center;
                 //Position = Velocity;
                 //Position.Normalize();
@@ -128,17 +143,36 @@ namespace StormGame
                 var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
                 var distance = (center - Position);
 
-               
 
-                Accel = distance*.5f;
+
+                _gravity = distance * .5f;
+                //Accel = _gravity;
+                //var repulse = distance * -1 * .1f;
+
+                //if (distance.Length() < radius)
+                //{
+                //    var temp = 1f - (distance.Length() / radius);
+                //    Accel += -Accel * (float)temp;
+                //}
+                _windForce = CalcWindForce(distance, 100);
+                //Accel += wind;
+                //Accel 
+                //Accel += repulse;
+
+                //if (Accel.Length() > MAX_ACCEL)
+                //    Accel = a0;
+                //Velocity += _windForce;
                 Velocity += Accel * deltaTime;
                 Velocity = ApplyDrag(Velocity);
                 if (wasHit)
                     Velocity *= 0.3f;
                 if (Velocity.Length() > MAX_VELOCITY)
                     Velocity = v0;
+
                 Position += Velocity;
                 wasHit = false;
+            }
+        }
 
         public Vector2 ApplyDrag(Vector2 velocity)
         {
@@ -146,9 +180,20 @@ namespace StormGame
              return velocity *= drag;
         }
 
+        public Vector2 CalcWindForce(Vector2 distance, float windMagnitude)
+        {
+          //  Vector2 windForce;
+            //var xlength = storm.X - debrie.X;
+            //var ylength = storm.Y - debrie.Y;
+            var a1 = (float)Math.Atan((float)distance.X /(float)distance.Y);
+            var windAngle = a1;
+            //a1 = MathHelper.ToDegrees(a1);
+            //var step = Math.Pow(distance.Y, 2) / Math.Pow(distance.Length(), 2);
+            //var a2 = 90f - a1;
 
-
-            }
+            //windForce = new Vector2((float)Math.Sin(MathHelper.ToRadians(a2)) * windMagnitude, (float)Math.Cos(MathHelper.ToRadians(a2)) * windMagnitude);
+            var windForce = new Vector2((float)Math.Sin(windAngle) * 10f, (float)Math.Cos(windAngle) * 10f);
+            return windForce;
         }
 
         public void StartOrbiting()
@@ -158,6 +203,5 @@ namespace StormGame
             isOrbiting = true;
             radius = rand.Next(25) + 30;
         }
-
     }
 }
