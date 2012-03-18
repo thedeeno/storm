@@ -95,7 +95,7 @@ namespace StormGame
         {
             if (CooldownReady)
             {                
-                Cooldown = 1.5f;  
+                Cooldown = 0.5f;  
                 CooldownReady = false;
                 time = 0;
                 wasHit = true;
@@ -144,28 +144,19 @@ namespace StormGame
                 var distance = (center - Position);
 
 
+                _gravity = distance;
+                _gravity *= .4f;
+                _windForce = CalcWindForce(distance, 500f);
 
-                _gravity = distance * .5f;
-                //Accel = _gravity;
-                //var repulse = distance * -1 * .1f;
-
-                //if (distance.Length() < radius)
-                //{
-                //    var temp = 1f - (distance.Length() / radius);
-                //    Accel += -Accel * (float)temp;
-                //}
-                _windForce = CalcWindForce(distance, 100);
-                //Accel += wind;
-                //Accel 
-                //Accel += repulse;
+                Accel = _gravity;
+                Accel += _windForce;
 
                 //if (Accel.Length() > MAX_ACCEL)
                 //    Accel = a0;
-                //Velocity += _windForce;
                 Velocity += Accel * deltaTime;
                 Velocity = ApplyDrag(Velocity);
                 if (wasHit)
-                    Velocity *= 0.3f;
+                    Velocity *= 0.1f;
                 if (Velocity.Length() > MAX_VELOCITY)
                     Velocity = v0;
 
@@ -182,18 +173,13 @@ namespace StormGame
 
         public Vector2 CalcWindForce(Vector2 distance, float windMagnitude)
         {
-          //  Vector2 windForce;
-            //var xlength = storm.X - debrie.X;
-            //var ylength = storm.Y - debrie.Y;
-            var a1 = (float)Math.Atan((float)distance.X /(float)distance.Y);
-            var windAngle = a1;
-            //a1 = MathHelper.ToDegrees(a1);
-            //var step = Math.Pow(distance.Y, 2) / Math.Pow(distance.Length(), 2);
-            //var a2 = 90f - a1;
+            var x = distance.X;
+            var y = distance.Y;
+            var a1 = (float)Math.Atan2((float)distance.X, (float)distance.Y);
+            var windAngle = a1 + MathHelper.ToRadians(90);
 
-            //windForce = new Vector2((float)Math.Sin(MathHelper.ToRadians(a2)) * windMagnitude, (float)Math.Cos(MathHelper.ToRadians(a2)) * windMagnitude);
-            var windForce = new Vector2((float)Math.Sin(windAngle) * 10f, (float)Math.Cos(windAngle) * 10f);
-            return windForce;
+            var windForce = new Vector2((float)Math.Sin(windAngle) * windMagnitude, (float)Math.Cos(windAngle) * windMagnitude);
+            return windForce / distance.Length();
         }
 
         public void StartOrbiting()
