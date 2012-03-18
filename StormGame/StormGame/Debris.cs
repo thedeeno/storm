@@ -31,6 +31,7 @@ namespace StormGame
         private Vector2 Velocity;
         private float theta;
         private const float WindAcceleration = 0.0003f;
+        private bool wasHit;
                 
         public Rectangle BoundingBox { get; set;  }
                 
@@ -52,6 +53,7 @@ namespace StormGame
             Weight = 10;
             time = 0.0f;
             RotationAngle = 0f;
+            wasHit = false;
             Origin.X = Texture.Width / 2;
             Origin.Y = Texture.Height / 2;
 
@@ -91,9 +93,9 @@ namespace StormGame
             if (CooldownReady)
             {                
                 Cooldown = 1.5f;  
-                Speed *= 0.3f;
                 CooldownReady = false;
                 time = 0;
+                wasHit = true;
             }            
         }
 
@@ -119,6 +121,9 @@ namespace StormGame
                 var v0 = Velocity;
                 var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
                 var a = new Vector2(50, 0);
+                if (wasHit)
+                    Velocity *= 0.3f;
+                wasHit = false;
 
                 Position = new Vector2(.5f * a.X * (float)Math.Pow(deltaTime, 2) + v0.X * deltaTime + Position.X, Position.Y);
 
